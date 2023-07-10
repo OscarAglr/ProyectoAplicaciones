@@ -15,7 +15,7 @@ table{
   font-size: 1.5rem;
   font-style: bold;
   border-collapse: collapse;
-    line-height: 3rem;
+  line-height: 3rem;
 }
 
 table thead{
@@ -31,8 +31,7 @@ table thead{
 }
 
 th, td{
-  border: 3px black;
-  border-style: ridge;
+
   padding: 0;
 }
 
@@ -125,8 +124,13 @@ a{
 }
 
 .controls-bar{
+  display: flex;
+  justify-content: first baseline;
+  align-items: center;
   padding: 10px;
 }
+
+
 
 
 
@@ -165,13 +169,25 @@ a{
   margin: 5px;
 }
 
+#controls-bar {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #0A3630;
+  display: flex;
+  justify-content: center;
+}
 
-#playBtn,#pauseBtn,#rwBtn, .button-2{
+#seek-bar {
+  width: 60%;
+}
+
+.button-2, .button-control, #editorBar button, #editorBar select{
   z-index: 2;
   text-align: center;
   font-family: "Sansita";
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 32px;
   margin: 0 5px 0 5px;
   padding: 10px 10px;
   color: #fff;
@@ -184,8 +200,11 @@ a{
 }
 
 
-.button-2 {
-  font-size: 20px;
+
+
+
+#upload-button::before {
+  content: "Subir foto";
 }
 
 #canvas {
@@ -201,11 +220,11 @@ a{
   justify-content: center;
   padding: 0.8rem 0;
 }
-
+/*
 .controls-bar{
   justify-content: center;
   display: none;
-}
+}*/
 
 #UlTags{
   font-size: 1.5rem;
@@ -223,15 +242,34 @@ a{
   background-color: #378f83;
 }
 
-
-#btnAdmin{
+.txtEnable{
+  font-size: 20px;
+}
+#btnAdmin {
   background-color:#12574e;
   font-size: 1.5rem;
+}
+#btnAdminSave{
+  background-color:#12574e;
+  font-size: 1.5rem;
+}
+#btnAdminCancel {
+  background-color: #a52a2a; 
+  font-size: 1.5rem;
+}
+
+#btnAdminCancel:hover
+{background-color: #ff5940;
 }
 
 #btnAdmin:hover{
   background-color: #378f83;
 }
+#btnAdminSave:hover{
+  background-color: #378f83;
+}
+
+
 
 .nav-buttons .button{
   flex: 1;
@@ -289,7 +327,7 @@ a{
 
 
 #contenedorSVideos::before, #contenedorSSus::before, #contenedorSArtículos::before,
-#contenedorSCuenta::before
+#contenedorSCuenta::before, #contenedorSAdmin::before
 {
   content: "";
   position: absolute;
@@ -301,6 +339,10 @@ a{
 }
 
 #contenedorSVideos::before, #contenedorSCuenta::before{
+  background-color: #00ffcc;
+}
+
+#contenedorSAdmin::before{
   background-color: #00ffcc;
 }
 
@@ -368,6 +410,14 @@ a{
   height: auto;
 }
 
+#contenedorSAdmin{
+  padding: 5px;
+  margin: 0;
+  background-color: #188162b4;
+  border-radius: 7px 7px 20px 20px;
+  height: auto;
+}
+
 #contenedorSMisión{
   padding: 5px;
   margin: 0 4.05% 0 4.05%;
@@ -413,19 +463,33 @@ a{
 }
 
 #contenedorSVideos h1, #contenedorSArtículos h1,
-#contenedorSCuenta h1{
+#contenedorSCuenta h1, #contenedorSAdmin h1{
   color: rgb(255, 255, 255);
   font-family: 'Hepta Slab', Courier, monospace;
   font-size: 1.5rem;  
 }
 
-#contenedorSVideos h1, #contenedorSCuenta h1{
+#contenedorSVideos h1, #contenedorSCuenta h1, #contenedorSAdmin h1{
   background-color: #45a681;
 }
 #contenedorSArtículos h1{
   background-color: #97a2c6;
 }
 
+.contenedorArticulo p {
+  color: white;
+  font-family: 'Hepta Slab', Courier, monospace;
+  font-size: 1.4rem;
+  margin: 2vh 3vw;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.contenedorArticulo img {
+  width: 75%;
+  height: auto;
+  max-height: 350px;
+}
 
 #navbarArtículos{
   background-color: #6a61cc;
@@ -518,9 +582,10 @@ a{
   flex-wrap: nowrap;
 }
 
-
-#tablaUsuarios{
+#tablaSuscripciones{
   width: 500px;
+  cursor: pointer;
+  overflow: auto;
 }
 
 #inputsAdminSus{
@@ -530,12 +595,35 @@ a{
   width: auto;
 }
 
+#inputsAdminVideos{
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 0;
+  width: auto;
+}
+
+#inputsAdminVideos textarea{
+  height: 250px;
+}
+
+#inputsAdminVideos>*{
+  margin: 5px 0;
+}
+
 #botonesAdminSus{
   margin-top: 10px;
-  justify-content: left;
+  justify-content: center;
   background-color: #ffffff00; 
   height: auto;
 }
+
+#inputsAdminSus2{
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-top: 0;
+  width: auto;
+  text-align: center
+;}
 
 #objetosMisión, #objetosFundadores{
   align-items: stretch; 
@@ -845,6 +933,10 @@ footer a{
   width: 100%;
 }
 
+#botonesAdminSus{
+  max-width: 500px;
+}
+
 .search-bar input[type="text"] {
   width: 100%;
   height: 100%;
@@ -897,7 +989,7 @@ footer a{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: auto;
+  width: 95%;
 }
 
 
@@ -927,11 +1019,17 @@ footer a{
 }
 
 .form-inputs {
+  font-family: 'Roboto', Courier, monospace;
   padding: 40px;
-  width: 400px;
+  width: 90%;
 }
 
-.form-inputs label {
+.forms-inputs input{
+  font-size: 1.5rem;
+  font-family: 'Roboto', Courier, monospace;
+}
+
+label {
   font-family: "Hepta Slab";
   display: block;
   margin-bottom: 10px;
@@ -940,17 +1038,206 @@ footer a{
   text-shadow:0px 5px 5px #00000082;
 }
 
-#form-crearCuenta{
+
+
+#objetosTopContenido > *{
+  margin: 0 5px;
+}
+
+#objetosTopContenido{
+  width: 100%;
+  justify-content: center;
+}
+
+.labelGrande{
+  font-size: 1.5rem;
+}
+
+.ainputLargo {
+  width: 50%;
+  padding: 5px;
+}
+
+.inputLargo{
+  padding: 10px 0 10px 10px;
+  width: 50%;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-color: #24baa6;
+  border-width: 6px;
+  border-style: inset;  
+  resize: none;
+  font-size: 24px;
+}
+
+.buttonTag{
+  background-color: #0E7455;
+  font-family: 'Hepta Slab', Courier, monospace;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  color: white;
+  border-radius: 50px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-color: #24baa6;
+  border-width: 3px;
+  border-style: inset;  
+  padding: 3px 6px;
+}
+
+input[type="checkbox"]{
+  width: 50px;
+  height: 50px;
+
+}
+
+.checkboxCustom {
+  width: 32px;
+  height: 32px;
+}
+
+#objetosGeneralVideo>*{
+  margin-top: 5px;
+}
+
+.miniaturaEscoger{
+  background-image: url(../resources/img/Familia_Mascotas.jpg);
+  background-size: 100% 100%;
+  border: solid 2px white;
+  position: relative;
+}
+
+
+#miniaturaGrande{
+  width: 470px;
+  height: 320px;
+}
+
+
+
+#miniaturaPequeña{
+  width: 298px;
+  height: 167px;
+}
+
+#objetosGestionarContenido{
+  margin-top: 10px;
+}
+
+#buttonsGestionarContenido{
+  margin-top: 10px;
+}
+
+.controlBotón{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 56.25px;
+  height: 50px;
+  position: absolute;
+  right: 5px;
+  bottom: 10px;
+  z-index: 1;
+}
+
+#controlBotónPeque{
+  width: 45px;
+  height: 40px;
+}
+
+
+select{
+  font-family: "Hepta Slab";
+  font-size: 1rem;
+}
+#controlBotónPeque #btnSubir,#controlBotónPeque #btnSubir2 {
+  line-height: 1rem;
+  width: 175px;
+  left:-175px;
+}
+
+
+#objetosLabelButton > *{
+  margin: 5px;
+}
+
+.fondoBotón{
+  width: 100%;
+  height: 100%;
+  background-color: #0a3630;
+  border: 3px solid white;
+  z-index: 10;
+  background-image: url(../resources/img/upload.png);
+  background-size: 100% 100%;
+}
+
+
+#btnSubir{
+  line-height: 1.5rem;
+  width: 200px;
+  background-color:#50CFBE;
+  font-size: 1.5rem;
+  text-decoration: none;
+  position: absolute;
+  left: -200px;
+  top: 6px;
+}
+
+#btnSubir2{
+  line-height: 1.5rem;
+  width: 200px;
+  background-color:#50CFBE;
+  font-size: 1.5rem;
+  text-decoration: none;
+  position: absolute;
+  left: -200px;
+  top: 6px;
+}
+
+
+#cmbTags{
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-color: #24baa6;
+  border-width: 6px;
+  border-style: inset;
+  resize: none;
+}
+
+
+
+#contenedorCategorías{
+  display: flex;
+  background-color: #00ffcc;
+  max-width: 450px;
+  padding: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-color: #24baa6;
+  border-width: 6px;
+  border-style: inset;  
+}
+
+  #contenedorCategorías>*{
+    margin: 2px 5px;
+  }
+
+#form-crearCuenta, #form-colab{
   display: flex;
   justify-content: center;
   align-items: center;
   width: calc(100% - 10px);
 }
 
-#inputsLogin{
-  width: 100%;
-}
 
+#btnCancelar{
+  background-color: #a52a2a9a; 
+  font-size: 1.5rem;
+}
 
 
 #inputsLogin .user-photo{
@@ -976,8 +1263,8 @@ footer a{
 }
 
 .form-inputs input,
-.form-inputs textarea {
-  width: 100%;
+.form-inputs textarea{
+  width: calc(100% - 20px);
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -989,8 +1276,24 @@ footer a{
   resize: none;
 }
 
+
+
+#TablaSus input{
+  width: 200px;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-color: #24baa6;
+  border-width: 6px;
+  border-style: inset;  
+  resize: none;
+  margin-left: 15px;
+}
+
 .form-inputs select{
-  width: 109%;
+  width: 100%;
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -1006,14 +1309,22 @@ footer a{
   font-family: "Sansita" Arial, monospace;
 }
 
-#submit-btn {
-  background-color: #188162b4;
+#submit-btn, #clear-btn {
+  background-color: #12574E;
   color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
+  font-size: 1.2rem;
   cursor: pointer;
-  font-family: "Sansita" Arial, monospace;
+  font-family: "Sansita", Arial, monospace;
+  margin: 5px;
+  width: 120px;
+}
+
+#clear-btn {
+  background-color: #a52a2a; 
+  
 }
 
 /* User cards */
@@ -1033,9 +1344,43 @@ footer a{
   border-style: inset;  
 }
 
-.user-photo, #video-camera {
+
+#user-cardMetrics{
+  min-width: 210px;
+}
+
+#user-cardMetrics h1{
+  background-color: inherit;
+}
+
+
+
+.labelMétrica{
+  font-size: 1rem;
+  width: 100%;
+  text-align: left;
+  color: #000000;
+  font-weight: normal;
+}
+
+.labelValor{
+  font-size: 1.2rem;
+  width: 100%;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.user-photo {
   width: 100px;
   height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+#video-camera {
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto;
@@ -1044,7 +1389,7 @@ footer a{
 .user-name {
   font-family: "Hepta Slab", Arial, monospace;
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 1.5rem;
   color: #000000;
   text-shadow:0px 5px 5px #00000082;
 }
@@ -1052,10 +1397,9 @@ footer a{
 .user-description {
   font-family: "Hepta Slab", Arial, monospace;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 1rem;
   color: #000000;
   text-shadow:0px 5px 5px #00000082;
-
 }
 
 .userContent {
@@ -1129,7 +1473,7 @@ footer a{
 
 #navBarVerticalArtículos{
   background-color: #201a65;
-  border-bottom: 6px solid #5e57a8;;
+  border-bottom: 6px solid #5e57a8;
 }
 
 
@@ -1158,9 +1502,7 @@ footer a{
     display: inline-block;
   }
 
-  #form-crearCuenta{
-    width: 350px;
-  }
+
 
   #mapa{ 
     width: 900px;
@@ -1174,8 +1516,11 @@ footer a{
   
 
   .form-wrapper{
-    width: 75%;
+    width: 400px;
   }
+
+
+  
   .navbar{
     display:flex;
   }
@@ -1287,6 +1632,9 @@ footer a{
     height: 360px;
   }
 
+  #formwColab{
+    width: 75%;
+  }
 
   #mapa{ 
     width: 750px;
@@ -1312,11 +1660,123 @@ footer a{
 
 /*#################################*/
 
+.button-2 {
+  font-size: 20px;
+  width: 144px;
+  height: 44px;
+  position: relative;
+}
+
+.small-button-2 {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.button-2 input[type="file"] {
+  appearance: none;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+}
+
+.button-2 label {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
 .results {
+  font-family: 'Roboto';
+  color: #fff;
+  font-weight: 900;
+  font-size: 16px;
   margin: 0;
   padding: 0;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.button-control {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 5px;
 }
 
 .hidden {
+  appearance: none;
   display: none;
+
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+
+}
+
+.listInput {
+  font-size: 24px;
+}
+
+#video-container video {
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+#articleEditor {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#bottomArticleEditor {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#articleEditor textarea {
+  width: 95%;
+  height: 50vh;
+  font-size: 16px;
+  
+}
+
+#editorBar{
+  width: 95%;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  padding: 8px 4px;
+  background-color: #0A3630;
+}
+
+#editorBar button, #editorBar select{
+  font-size: 18px;
+  padding: 10px 15px;
+  background-color:#12574e;
+}
+
+#inputsAdminArticles {
+  padding: 0;
+  margin: 0;
+}
+
+.nuevoContenedor {
+  width: 100%;
+  margin: 0 auto;
 }
